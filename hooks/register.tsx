@@ -1,5 +1,5 @@
 import { atom, read, update } from 'claude-code'
-import type { Register, Plugin } from 'claude-code'
+import type { EngineInterface, Register } from 'claude-code'
 
 import type { Feed, Open } from '../types'
 import { COLOR, lineOf, panelOf, rowOf } from './panel'
@@ -17,13 +17,13 @@ type Pull = { cursor: number; events: Event[]; open: Incident[] }
 
 const line = (i: Open) => `${i.project}  ${i.title}${i.hits > 1 ? ` x${i.hits}` : ''}`
 
-async function readToken($: Plugin, service: string): Promise<string | null> {
+async function readToken($: EngineInterface, service: string): Promise<string | null> {
   const run = await $.process.run(['security', 'find-generic-password', '-s', service, '-w'], { timeoutMs: 5000 })
   const token = run.stdout.trim()
   return run.exitCode === 0 && token ? token : null
 }
 
-async function pull($: Plugin, url: string, token: string, after: number | null): Promise<Pull | null> {
+async function pull($: EngineInterface, url: string, token: string, after: number | null): Promise<Pull | null> {
   const query = after === null ? '' : `?after=${after}`
   const res = await $.http.fetch(`${url.replace(/\/$/, '')}/events${query}`, {
     headers: { authorization: `Bearer ${token}` },
@@ -35,7 +35,7 @@ type Conf = { url: string; service: string }
 // The cursor and the token live for the session; a reload starts them over.
 const link: { cursor: number | null; token: string | null } = { cursor: null, token: null }
 
-async function tick($: Plugin, conf: Conf) {
+async function tick($: EngineInterface, conf: Conf) {
   link.token ??= await readToken($, conf.service)
   let got: Pull | null = null
   if (link.token !== null) {

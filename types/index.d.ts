@@ -3,6 +3,6 @@ export type Feed = { open: Open[]; failures: number }
 
 declare module 'claude-code' {
   interface PluginState {
-    'golem-mod': { feed: Feed }
+    'golem-mod': { feed: Shaped<Feed> }
   }
 }

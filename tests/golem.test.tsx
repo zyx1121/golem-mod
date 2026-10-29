@@ -3,14 +3,16 @@ import { expect, mock, test } from 'claude-code/testing'
 const BAND = {
   plugin: 'golem-mod',
   component: 'AbovePrompt',
-  props: { hasSurvey: false, isWorking: false, maxRows: 5, bodyColumns: 100 },
+  props: { hasSurvey: false, isWorking: false, maxRows: 5, bodyColumns: 100, scroll: { offset: 0, bodyRows: 5 }, view: {} },
 } as const
 
 const open = [{ id: 'a', rule: 'log.warn', project: 'roll.zyx.tw', title: 'smart.embed_down', severity: 'warn', hits: 33 }]
 
-function engine(on: Parameters<Parameters<typeof test>[1]>[1], feed: unknown, ok = true) {
+type On = Parameters<typeof mock.clock>[0]
+
+function engine(on: On, feed: unknown, ok = true) {
   on('command.register', () => ({ value: { command: 'golem' } }))
-  on('process.run', () => ({ value: { exitCode: 0, stdout: 'token\n', stderr: '' } }))
+  on('process.run', () => ({ value: { exitCode: 0, stdout: 'token\n', stderr: '', isStdoutTruncated: false, isStderrTruncated: false } }))
   on('http.fetch', (_, e) => {
     expect(e.url).toBe('https://golem.zyx.tw/events')
     expect(e.init?.headers?.authorization).toBe('Bearer token')
@@ -53,7 +55,7 @@ test('a new event toasts once, and the first pull replays nothing', async ($, on
   let pulls = 0
   const toasts: string[] = []
   on('command.register', () => ({ value: { command: 'golem' } }))
-  on('process.run', () => ({ value: { exitCode: 0, stdout: 'token\n', stderr: '' } }))
+  on('process.run', () => ({ value: { exitCode: 0, stdout: 'token\n', stderr: '', isStdoutTruncated: false, isStderrTruncated: false } }))
   on('http.fetch', (_, e) => {
     // The first pull has no cursor; the next one asks after the cursor it got.
     expect(e.url).toBe(pulls === 0 ? 'https://golem.zyx.tw/events' : 'https://golem.zyx.tw/events?after=2')

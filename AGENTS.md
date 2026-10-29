@@ -13,8 +13,15 @@ Claude Code mod (a function-hooks plugin). `hooks/register.tsx` exports `registe
 ## Verify
 
 ```sh
+bunx -p typescript tsc -p tsconfig.json
 claude plugin validate .
 claude plugin test .
 ```
 
+No node_modules. `types/claude-code.d.ts` is the engine contract of the Claude Code version CI pins. Copy it from the `plugin-authoring` skill, do not edit it.
+
 To run from source, use `claude --plugin-dir .`. A running session does not reload hooks, so restart it.
+
+## Release
+
+Release Please opens the release PR from Conventional Commits and bumps `.claude-plugin/plugin.json`.

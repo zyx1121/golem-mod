@@ -1,0 +1,30 @@
+{
+  "name": "golem-mod",
+  "version": "0.1.0",
+  "description": "golem alerts in Claude Code: a line above the prompt while an incident is open, a toast when one opens or resolves, and /golem for the list.",
+  "author": { "name": "zyx1121", "url": "https://github.com/zyx1121" },
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "url": {
+      "type": "string",
+      "title": "golem URL",
+      "description": "Where golem runs. The mod pulls GET /events from it.",
+      "required": false,
+      "default": "https://golem.zyx.tw"
+    },
+    "keychainService": {
+      "type": "string",
+      "title": "Keychain service",
+      "description": "The macOS keychain item that holds the golem token. The token never leaves memory.",
+      "required": false,
+      "default": "kilo/golem-mcp"
+    },
+    "pollSeconds": {
+      "type": "number",
+      "title": "Poll interval",
+      "description": "Seconds between pulls. 30 by default; 10 at the least.",
+      "required": false,
+      "default": 30
+    }
+  }
+}

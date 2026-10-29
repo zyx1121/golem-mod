@@ -1,0 +1,14 @@
+{
+  "name": "golem-mod",
+  "owner": { "name": "zyx1121", "url": "https://github.com/zyx1121" },
+  "description": "Marketplace for the golem-mod plugin: golem incidents in Claude Code.",
+  "plugins": [
+    {
+      "name": "golem-mod",
+      "source": "./",
+      "description": "golem alerts in Claude Code: a line above the prompt while an incident is open, a toast when one opens or resolves, and /golem.",
+      "category": "monitoring",
+      "tags": ["golem", "alerts", "band", "function-hooks"]
+    }
+  ]
+}

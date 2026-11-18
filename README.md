@@ -23,7 +23,7 @@ A monitor nobody sees is a monitor that failed silently. [golem](https://golem.z
 
 ## Features
 
-- **One panel above the prompt**: the open count and the newest incident, next to the other band panels. The count turns red when one is an error.
+- **One panel above the prompt**: the open count and the newest incident, on a row of its own across the band. The count turns red when one is an error.
 - **A toast on change**: an incident that opens or resolves while the session runs. A new session does not replay old events.
 - **Silence is visible**: 3 failed pulls in a row show `unreachable` and turn the border red.
 - **Pull, not push**: a session is not always online and cannot receive a webhook, so the mod calls golem's `GET /events`.
@@ -63,7 +63,7 @@ Start a new session. The panel appears while an incident is open. The mod reads 
 
 - `hooks/register.tsx` registers `/golem` on `session.start`, pulls on a timer and draws the panel on `AbovePrompt`.
 - The first pull has no cursor and only learns where the feed is. Each later pull asks `GET /events?after=<cursor>` and toasts each event.
-- `hooks/panel.tsx` draws the panel the same way as the other band mods, so they share one row.
+- `hooks/panel.tsx` draws the panel the same way as the other band mods. The engine gives each mod a row of its own.
 
 ## Limits
 

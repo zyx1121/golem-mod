@@ -25,7 +25,7 @@
 
 ## 功能
 
-- **输入框上方一个面板**：未解告警的数量与最新一条，跟其他 band 面板排在同一行。有错误级别时数字变红。
+- **输入框上方一个面板**：未解告警的数量与最新一条，自己占一整行。有错误级别时数字变红。
 - **变化时弹提示**：session 运行期间告警开启或解除各弹一次，新 session 不会重播旧事件。
 - **沉默也看得见**：连续 3 次拉取失败会显示 `unreachable`，边框变红。
 - **拉取而不是推送**：session 不一定在线、收不到 webhook，所以 mod 调用 golem 的 `GET /events`。
@@ -65,7 +65,7 @@ export CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1
 
 - `hooks/register.tsx` 在 `session.start` 注册 `/golem`，定时拉取，并在 `AbovePrompt` 绘制面板。
 - 第一次拉取没有 cursor，只了解 feed 当前的位置。之后每次调用 `GET /events?after=<cursor>`，每条事件弹一次提示。
-- `hooks/panel.tsx` 的画法跟其他 band mod 相同，所以它们共用一行。
+- `hooks/panel.tsx` 的画法跟其他 band mod 相同。引擎让每个 mod 各占一行。
 
 ## 限制
 

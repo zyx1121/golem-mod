@@ -94,7 +94,7 @@ export const register: Register = (on, options) => {
     // The whole band width: the panel sits on a row of its own, so the incident title shows in full.
     const width = e.props.bodyColumns
     const panel = panelOf(kit, { title: 'GOLEM', tone: down ? 'error' : 'normal', width }, lineOf(kit, segs))
-    // The same row as the other band panels: this mod's panel, then what is beneath.
+    // This mod's panel, then what is beneath; at the whole band width the panel takes a row of its own.
     return rowOf(kit, [panel], await next(e))
   })
 }

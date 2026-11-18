@@ -1,8 +1,11 @@
 {
   "name": "golem-mod",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "golem alerts in Claude Code: a line above the prompt while an incident is open, a toast when one opens or resolves, and /golem for the list.",
-  "author": { "name": "zyx1121", "url": "https://github.com/zyx1121" },
+  "author": {
+    "name": "zyx1121",
+    "url": "https://github.com/zyx1121"
+  },
   "types": "./types/index.d.ts",
   "userConfig": {
     "url": {

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/zyx1121/golem-mod/compare/v0.2.0...v0.3.0) (2026-11-18)
+
+
+### Features
+
+* let the panel shrink to share its row with SHIP ([#7](https://github.com/zyx1121/golem-mod/issues/7)) ([29a824b](https://github.com/zyx1121/golem-mod/commit/29a824b7c48559d3cf985ace18607307d1081459))
+
 ## [0.2.0](https://github.com/zyx1121/golem-mod/compare/v0.1.0...v0.2.0) (2026-11-18)
 
 

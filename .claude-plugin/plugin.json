@@ -1,6 +1,6 @@
 {
   "name": "golem-mod",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "golem alerts in Claude Code: a line above the prompt while an incident is open, a toast when one opens or resolves, and /golem for the list.",
   "author": {
     "name": "zyx1121",

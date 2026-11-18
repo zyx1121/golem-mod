@@ -91,9 +91,8 @@ export const register: Register = (on, options) => {
           { text: `  ${line(first)}`, color: COLOR.text },
           ...(open.length > 1 ? [{ text: `  +${open.length - 1}`, color: COLOR.label }] : []),
         ]
-    // The whole band width: the panel sits on a row of its own, so the incident title shows in full.
-    const width = e.props.bodyColumns
-    const panel = panelOf(kit, { title: 'GOLEM', tone: down ? 'error' : 'normal', width }, lineOf(kit, segs))
+    // The whole band width, and free to shrink: alone the panel fills its row, beside SHIP the two shrink to a half each.
+    const panel = panelOf(kit, { title: 'GOLEM', tone: down ? 'error' : 'normal', width: e.props.bodyColumns }, lineOf(kit, segs))
     // This mod's panel, then what is beneath; at the whole band width the panel takes a row of its own.
     return rowOf(kit, [panel], await next(e))
   })

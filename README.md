@@ -23,7 +23,7 @@ A monitor nobody sees is a monitor that failed silently. [golem](https://golem.z
 
 ## Features
 
-- **One panel above the prompt**: the open count and the newest incident, on a row of its own across the band. The count turns red when one is an error.
+- **One panel above the prompt**: the open count and the newest incident, across the band, or on the left half when ship-mod draws its panel beside it. The count turns red when one is an error.
 - **A toast on change**: an incident that opens or resolves while the session runs. A new session does not replay old events.
 - **Silence is visible**: 3 failed pulls in a row show `unreachable` and turn the border red.
 - **Pull, not push**: a session is not always online and cannot receive a webhook, so the mod calls golem's `GET /events`.

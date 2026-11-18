@@ -2,12 +2,8 @@ import { atom, read, update } from 'claude-code'
 import type { EngineInterface, Register } from 'claude-code'
 
 import type { Feed, Open } from '../types'
-import { cellsOf, COLOR, FRAME_CELLS, lineOf, panelOf, rowOf } from './panel'
+import { COLOR, lineOf, panelOf, rowOf } from './panel'
 import type { Seg } from './panel'
-
-// The widest the panel gets, in cells and as a share of the terminal; a longer line is cut at the end so the other band panels keep their room.
-const MAX_CELLS = 64
-const MAX_SHARE = 0.25
 
 // A pull that fails this many times in a row shows as "unreachable": a silent monitor is the failure golem exists to catch.
 const FAILS_SHOWN = 3
@@ -95,10 +91,10 @@ export const register: Register = (on, options) => {
           { text: `  ${line(first)}`, color: COLOR.text },
           ...(open.length > 1 ? [{ text: `  +${open.length - 1}`, color: COLOR.label }] : []),
         ]
-    // Sized to its line, so the panel does not stretch over the free space of the row.
-    const width = Math.min(cellsOf(segs) + FRAME_CELLS, MAX_CELLS, Math.floor(e.props.bodyColumns * MAX_SHARE))
+    // The whole band width: the panel sits on a row of its own, so the incident title shows in full.
+    const width = e.props.bodyColumns
     const panel = panelOf(kit, { title: 'GOLEM', tone: down ? 'error' : 'normal', width }, lineOf(kit, segs))
-    // The same row as the other band panels: this mod's panel, then what is beneath.
+    // This mod's panel, then what is beneath; at the whole band width the panel takes a row of its own.
     return rowOf(kit, [panel], await next(e))
   })
 }
